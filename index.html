@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Create a function to getComputerChoice - "rock", "paper", or "scissor"
+        //create variable i to get random value between 0, 1, or 2 using math.random
+        //using a conditional statement, return "rock" for 0, "paper", for 1, or "scissor" for 2
+
+        function getComputerChoice() {
+            let i = Math.floor(Math.random() * 3);
+            
+            if(i === 0) {
+                return "rock";
+            } else if(i === 1) {
+                return "paper";
+            } else {
+                return "scissor";
+            }
+        }
+
+        getComputerChoice();
+
+        console.log(getComputerChoice());
+
+    </script>
+</body>
+</html>
