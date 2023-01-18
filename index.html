@@ -24,6 +24,8 @@
             }
         }
 
+        const options = ["rock", "paper", "scissors"];
+
         
 
         //create a function to play a single round of rock, paper, scissors
@@ -32,6 +34,8 @@
         //cases when player selects scissors: if computer -- rock: lose; paper: win; scissors: tie;
 
         function playRound(playerSelection, computerSelection) {
+            
+            
             if((playerSelection === 'rock' && computerSelection === 'paper') || (playerSelection === 'paper' && computerSelection === 'scissors') || (playerSelection === 'scissors' && computerSelection === 'rock')) {
                 return 'lose';
             } else if ((playerSelection === 'rock' && computerSelection === 'scissors') || (playerSelection === 'paper' && computerSelection === 'rock') || (playerSelection === 'scissors' && computerSelection === 'paper')) {
@@ -41,13 +45,93 @@
             }
         }
 
-        const playerSelection = prompt("rock, paper or scissors?").toLowerCase();
-        const computerSelection = getComputerChoice();
+        function roundResult(playerSelection, computerSelection) {
+            const game = playRound(playerSelection, computerSelection);
+            if(game === 'win') {
+                return `player wins! ${playerSelection} beats ${computerSelection}`
+            } else if (game === 'lose') {
+                return `computer wins! ${computerSelection} beats ${playerSelection}`
+            } else if (game === 'tie') {
+                return `Its a tie! You both played ${computerSelection}`
+            }
+            
+        }
 
-        console.log(`Player Shows ${playerSelection}`);
-        console.log(`Computer shows ${computerSelection}`);
-        console.log(playRound(playerSelection, computerSelection));
+        function getPlayerChoice() {
+            let validatedInput = false;
+            while(validatedInput == false) {
+                const choice = prompt("Rock Paper Scissors");
+                if(choice == null) {
+                    continue;
+                }
+                const choiceLowercase = choice.toLowerCase();
+                if(options.includes(choiceLowercase)) {
+                    validatedInput = true;
+                    return choiceLowercase;
+                }
+            }
+        }
+        
+        function game() {
+            console.log("Rock-Paper-Scissors by Codnuked!");
+            let playerScore = 0;
+            let computerScore = 0;
+            for (let i = 0; i < 5; i++) {
+                const playerSelection = getPlayerChoice();
+                const computerSelection = getComputerChoice();
+                console.log(roundResult(playerSelection, computerSelection));
+                console.log("/////////////// **** /////////////");
+                if (playRound(playerSelection, computerSelection) == 'lose') {
+                    computerScore++;
+                } else if (playRound(playerSelection, computerSelection) == 'win') {
+                    playerScore++;
+                } 
+            }
 
+            console.log("Game Ends. Results: ");
+            if (playerScore > computerScore) {
+                console.log(`Player Wins! Final Score: Player: ${playerScore} - Computer: ${computerScore}`);
+            } else if (computerScore > playerScore) {
+                console.log(`Computer Wins! Final Score: Player: ${playerScore} - Computer: ${computerScore}`);
+            } else if (computerScore == playerScore) {
+                console.log(`Its a tie! Final Score: Player: ${playerScore} - Computer: ${computerScore}`);
+            }
+        }
+        
+        game();
+        
+        
+
+        //game function that runs for 5 rounds
+        //if the player wins, a point is added to playerScore
+        //if the computer wins, a point is added to computerScore
+        //if its a tie, no points are added
+        //if playerScore > computerScore, player wins, else if computer wins, else its a tie.
+        
+        // function game() {
+        //     let playerScore = 0;
+        //     let computerScore = 0;
+        //     for (let i = 0; i < 5; i++) {
+        //         playRound(playerSelection, computerSelection);
+        //         if(playRound(playerSelection, computerSelection) === 'win') {
+        //             playerScore++;
+        //         } else if(playRound(playerSelection, computerSelection) === 'lose') {
+        //             computerScore++;
+        //         } 
+        //         console.log(playerScore);
+        //         console.log(computerScore);
+        //     }
+
+        //     if(playerScore > computerScore) {
+        //         console.log("Player Wins!");
+        //     } else if (computerScore > playerScore) {
+        //         console.log("Computer Wins!");
+        //     } else {
+        //         console.log("Its a tie!");
+        //     }
+        // }
+
+        // game();
     </script>
 </body>
 </html>
